@@ -13,6 +13,8 @@
 
 package io.aexp.nodes.graphql;
 
+import io.aexp.nodes.graphql.models.TestModelFragment;
+import io.aexp.nodes.graphql.models.TestModelSimple;
 import org.junit.Before;
 import org.junit.Test;
 import io.aexp.nodes.graphql.models.TestModel;
@@ -163,5 +165,16 @@ public class GraphQLRequestEntityTest {
         assertEquals(EXAMPLE_URL, requestEntity.getUrl().toString());
         assertEquals(Collections.singletonList(BigDecimal.class), requestEntity.getScalars());
         assertEquals("GraphQLRequestEntity{request='query { monay money } ', url='"+EXAMPLE_URL+"'}", requestEntity.toString());
+    }
+
+    @Test
+    public void requestWithFragment() throws MalformedURLException {
+        GraphQLRequestEntity requestEntity = GraphQLRequestEntity.Builder()
+            .url(EXAMPLE_URL)
+            .request(TestModelFragment.class)
+            .build();
+
+        assertEquals(EXAMPLE_URL, requestEntity.getUrl().toString());
+        assertEquals("GraphQLRequestEntity{request='query { type { ... on FragmentType { simpleString } } } ', url='"+EXAMPLE_URL+"'}", requestEntity.toString());
     }
 }
