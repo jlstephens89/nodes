@@ -58,9 +58,9 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray-americanexpress-maven</id>
-            <name>americanexpress-maven</name>
-            <url>https://api.bintray.com/maven/americanexpress/maven/io.aexp.nodes.graphql/;publish=1</url>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/jlstephens89/nodes</url>
         </repository>
     </distributionManagement>
 
