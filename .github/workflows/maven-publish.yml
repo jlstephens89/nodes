@@ -4,6 +4,10 @@
 name: Maven Package
 
 on: workflow_dispatch
+  
+defaults:
+  run:
+    working-directory: ./nodes
 
 jobs:
   build:
@@ -22,11 +26,9 @@ jobs:
         distribution: 'zulu'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-    - uses: ./nodes
     - name: Build with Maven
       run: mvn -B package --file pom.xml
       
-    - uses: ./nodes
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       
