@@ -25,6 +25,7 @@ final class Property {
     private Map<String, Object> variables;
     private Map<String, Property> children;
     private StringBuilder message = new StringBuilder();
+    private String fragmentType;
 
     Property() {
         this.arguments = null;
@@ -66,10 +67,19 @@ final class Property {
         }
         if (children != null && !children.isEmpty()) {
             message.append("{ ");
+
+            if (fragmentType != null && !fragmentType.isEmpty()) {
+                message.append("... on ").append(fragmentType).append(" { ");
+            }
+
             for (Map.Entry<String, Property> entry : children.entrySet()) {
                 message.append(entry.getValue().getMessage(entry.getKey()));
             }
             message.append("} ");
+
+            if (fragmentType != null && !fragmentType.isEmpty()) {
+                message.append("} ");
+            }
         }
         String res = message.toString();
         message.setLength(0);
@@ -126,5 +136,13 @@ final class Property {
                 ", children=" + children +
                 ", message=" + message.toString() +
                 '}';
+    }
+
+    public String getFragmentType() {
+        return fragmentType;
+    }
+
+    public void setFragmentType(String fragmentType) {
+        this.fragmentType = fragmentType;
     }
 }

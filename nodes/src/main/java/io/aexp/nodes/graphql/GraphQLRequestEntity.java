@@ -27,6 +27,7 @@ import java.util.Map;
 
 import io.aexp.nodes.graphql.annotations.GraphQLArgument;
 import io.aexp.nodes.graphql.annotations.GraphQLArguments;
+import io.aexp.nodes.graphql.annotations.GraphQLFragment;
 import io.aexp.nodes.graphql.annotations.GraphQLIgnore;
 import io.aexp.nodes.graphql.annotations.GraphQLProperty;
 import io.aexp.nodes.graphql.annotations.GraphQLVariable;
@@ -169,6 +170,7 @@ public final class GraphQLRequestEntity {
             resourceChild.put(resourceName, resourceProperty);
             children = resourceChild;
         }
+
         property.setChildren(Collections.unmodifiableMap(children));
         property.setMethod(requestMethod);
         property.setVariables(Collections.unmodifiableMap(propertyVariables));
@@ -300,6 +302,11 @@ public final class GraphQLRequestEntity {
             }
 
             property.setArguments(arguments);
+
+            GraphQLFragment fragment = (GraphQLFragment) field.getAnnotation(GraphQLFragment.class);
+            if (fragment != null) {
+                property.setFragmentType(fragment.type());
+            }
 
             if (isList(field)) {
                 Type type = field.getGenericType();
