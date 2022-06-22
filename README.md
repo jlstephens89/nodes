@@ -1,4 +1,4 @@
-# Nodes
+# A fork of americanexpress/Nodes that adds Graph QL Fragment support
 > A GraphQL JVM Client - Java, Kotlin, Scala, etc.
 
 [![Build Status](https://travis-ci.org/americanexpress/nodes.svg)](https://travis-ci.org/americanexpress/nodes)
